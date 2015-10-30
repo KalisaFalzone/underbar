@@ -1,4 +1,5 @@
-(function() {
+(
+  function() {
   'use strict';
 
   window._ = {};
@@ -38,13 +39,13 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-  if (typeof n === 'undefined') {
-    return array[array.length-1];
-  }
+    if (typeof n === 'undefined') {
+      return array[array.length-1];
+    }
 
-  if (n >= array.length) {
-    return array;
-  }
+    if (n >= array.length) {
+      return array;
+    }
 
     return array.slice(array.length-n);
   };
@@ -409,10 +410,40 @@
 
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
-  _.intersection = function() {
-    var argList = Array.prototype.slice.call(arguments, 1);
-    return _.reduce(array, function(memo, arg){
-      if (_.every(argList, function(oarg){
+
+  // _.intersection = function() {
+  //   var argList = [].slice.call(arguments);
+  //   var results = [];
+  //   var wholeList = [];
+
+  //   //create a wholelist of all arguments a unique list
+  //   _.each(argList, function(arg) {
+  //     _.each(arg, function(item) {
+  //       if (_.indexOf(wholeList, item) < 0) {
+  //         wholeList.push(item);
+  //       }
+  //     });
+  //   });
+
+  //   _.each(wholeList, function(element) {
+  //     if (
+  //       _.every(argList,
+  //       function(array){
+  //         return _.indexOf(array, element) >= 0;
+  //       })
+  //     ) {
+  //       results.push(element);
+  //     }
+  //   });
+
+  //   return results;
+  // };
+
+
+    _.intersection = function() {
+    var argList = [].slice.call(arguments, 1);
+    return _.reduce(arguments[0], function(memo, arg){
+      if (_.every(argList, function(oarg) {
         return _.indexOf(oarg, arg) >= 0; })) {
         memo.push(arg);
        }
@@ -448,6 +479,5 @@
       }
     };
   };
-
 
 }());
